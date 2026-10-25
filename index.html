@@ -1,0 +1,928 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Powered by Mountains: Bhutan, AI and Gelephu Mindfulness City</title>
+  <meta name="description" content="An interactive scenario essay on how AI could reshape Bhutan's economy, and what Gelephu Mindfulness City has to get right, 2026 to 2032.">
+  <style>
+/* Powered by Mountains: styles
+   Tokens follow a validated 3-series palette (blue, orange, aqua) for the
+   three strategies; ink is reserved for "your settings". */
+
+:root {
+  color-scheme: light;
+  --page: #f6f6f3;
+  --surface: #fcfcfb;
+  --ink: #121817;
+  --ink-2: #4d5452;
+  --muted: #6b6a66;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --ring: rgba(11, 11, 11, 0.12);
+  --accent: #1c5cab;
+  --s-balanced: #2a78d6;
+  --s-compute: #eb6834;
+  --s-people: #1baf7a;
+  --serif: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --panel-w: 25rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7;
+    --muted: #9a988f; --grid: #2c2c2a; --axis: #383835; --ring: rgba(255, 255, 255, 0.12);
+    --accent: #6da7ec; --s-balanced: #3987e5; --s-compute: #d95926; --s-people: #199e70;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7;
+  --muted: #9a988f; --grid: #2c2c2a; --axis: #383835; --ring: rgba(255, 255, 255, 0.12);
+  --accent: #6da7ec; --s-balanced: #3987e5; --s-compute: #d95926; --s-people: #199e70;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+body { margin: 0; background: var(--page); color: var(--ink); font-family: var(--serif); line-height: 1.7; }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+.skip { position: absolute; left: -999px; top: 0; background: var(--surface); padding: .5rem 1rem; z-index: 50; font-family: var(--sans); }
+.skip:focus { left: 1rem; top: 1rem; }
+
+/* Masthead */
+.masthead { padding: clamp(3rem, 9vw, 7rem) 1.25rem 2rem; }
+.masthead-inner { max-width: 72rem; margin: 0 auto; position: relative; }
+.masthead h1 { font-size: clamp(2.8rem, 8vw, 6rem); line-height: .98; letter-spacing: -0.03em; margin: 0 0 1.25rem; max-width: 12ch; }
+.deck { font-size: clamp(1.15rem, 2.2vw, 1.5rem); line-height: 1.45; max-width: 38rem; color: var(--ink-2); margin: 0 0 1.5rem; }
+.byline { font-family: var(--sans); font-size: .9rem; color: var(--muted); margin: 0; }
+.how-to { font-family: var(--sans); font-size: .95rem; color: var(--ink-2); margin: 1.5rem 0 0; max-width: 38rem; }
+.theme-toggle { position: absolute; top: -2rem; right: 0; font: .85rem var(--sans); background: transparent; color: var(--ink-2);
+  border: 1px solid var(--ring); border-radius: 6px; padding: .35rem .7rem; cursor: pointer; }
+.theme-toggle:hover { color: var(--ink); border-color: var(--axis); }
+
+/* Layout */
+.layout { max-width: 72rem; margin: 0 auto; padding: 0 1.25rem 6rem; display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--panel-w); gap: 3.5rem; align-items: start; }
+.essay { max-width: 38rem; min-width: 0; }
+
+.entry { padding: 2.75rem 0 .5rem; border-top: 1px solid var(--grid); scroll-margin-top: 1rem; }
+.entry:first-child { border-top: 0; padding-top: 1rem; }
+.date { font: .9rem var(--sans); color: var(--muted); margin: 0 0 .35rem; }
+.entry h2 { font-size: clamp(1.7rem, 3.4vw, 2.25rem); line-height: 1.15; letter-spacing: -0.015em; margin: 0 0 1.1rem; }
+.prose { font-size: 1.12rem; margin: 0 0 1.15rem; }
+.prose sup { font: .72rem var(--sans); margin-left: .1em; }
+.prose sup a { text-decoration: none; }
+.list { padding-left: 1.2rem; margin: 0 0 1.15rem; }
+.list li { margin-bottom: .55rem; }
+
+/* Scenario controls */
+.figure { background: var(--surface); border: 1px solid var(--ring); border-radius: 10px; padding: 1.25rem; margin: 1.5rem 0 1.75rem; font-family: var(--sans); }
+.figure h3 { font-size: 1rem; margin: 0 0 .25rem; font-family: var(--sans); }
+.figure .hint { font-size: .85rem; color: var(--muted); margin: 0 0 1rem; }
+.presets { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .6rem; margin-bottom: 1.25rem; }
+.preset { text-align: left; font: inherit; background: var(--page); color: var(--ink); border: 1px solid var(--ring);
+  border-left: 5px solid var(--c); border-radius: 8px; padding: .65rem .75rem; cursor: pointer; }
+.preset[data-preset="compute"] { --c: var(--s-compute); }
+.preset[data-preset="balanced"] { --c: var(--s-balanced); }
+.preset[data-preset="people"] { --c: var(--s-people); }
+.preset b { display: block; font-size: .95rem; }
+.preset span { font-size: .8rem; color: var(--ink-2); line-height: 1.35; display: block; margin-top: .15rem; }
+.preset:hover { border-color: var(--axis); border-left-color: var(--c); }
+.preset[aria-pressed="true"] { background: var(--surface); box-shadow: 0 0 0 2px var(--c); }
+
+fieldset { border: 0; padding: 0; margin: 0 0 1rem; }
+legend { font-size: .85rem; color: var(--ink-2); padding: 0; margin-bottom: .5rem; font-weight: 600; }
+.slider { display: grid; grid-template-columns: 1fr auto; gap: .1rem .75rem; margin-bottom: .85rem; align-items: baseline; }
+.slider label { font-size: .9rem; }
+.slider output { font-size: .9rem; font-variant-numeric: tabular-nums; font-weight: 600; }
+.slider input { grid-column: 1 / -1; width: 100%; accent-color: var(--accent); margin: .25rem 0 0; }
+.reset { font: .85rem var(--sans); background: transparent; color: var(--ink-2); border: 1px solid var(--ring); border-radius: 6px; padding: .35rem .7rem; cursor: pointer; }
+.reset:hover { color: var(--ink); border-color: var(--axis); }
+
+.live { font-family: var(--sans); font-size: .95rem; background: var(--surface); border: 1px solid var(--ring); border-left: 5px solid var(--c, var(--ink)); border-radius: 8px; padding: .8rem 1rem; margin: 0 0 1.5rem; }
+.live[data-ending="empty"] { --c: var(--s-compute); }
+.live[data-ending="middle"] { --c: var(--s-balanced); }
+.live[data-ending="hub"] { --c: var(--s-people); }
+.live b { font-weight: 700; }
+
+/* Endings */
+.endings { display: grid; gap: .9rem; margin: 1.25rem 0 1.5rem; }
+.ending { background: var(--surface); border: 1px solid var(--ring); border-left: 5px solid var(--c); border-radius: 8px; padding: 1rem 1.15rem .35rem; }
+.ending[data-ending="empty"] { --c: var(--s-compute); }
+.ending[data-ending="middle"] { --c: var(--s-balanced); }
+.ending[data-ending="hub"] { --c: var(--s-people); }
+.ending h3 { margin: 0 0 .4rem; font-size: 1.15rem; display: flex; gap: .6rem; align-items: baseline; flex-wrap: wrap; }
+.ending .tag { font: .75rem var(--sans); color: var(--ink); background: var(--page); border: 1px solid var(--ring); border-radius: 999px; padding: .1rem .55rem; display: none; }
+.ending.is-current { box-shadow: 0 0 0 2px var(--c); }
+.ending.is-current .tag { display: inline-block; }
+.ending .prose { font-size: 1.02rem; }
+
+/* Scenario panel */
+.panel { position: sticky; top: 1rem; font-family: var(--sans); background: var(--surface); border: 1px solid var(--ring); border-radius: 12px; padding: 1.1rem 1.1rem 1rem; }
+.panel-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; margin-bottom: .75rem; }
+.panel-year { font-size: 3.4rem; line-height: .9; font-weight: 700; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+.panel-title { font-size: .85rem; color: var(--muted); text-align: right; line-height: 1.3; }
+.years { display: flex; gap: 2px; margin-bottom: 1rem; }
+.years button { flex: 1; font: .75rem var(--sans); font-variant-numeric: tabular-nums; padding: .35rem 0; background: transparent; color: var(--muted);
+  border: 0; border-bottom: 2px solid var(--grid); cursor: pointer; }
+.years button:hover { color: var(--ink); }
+.years button[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--ink); font-weight: 700; }
+.readouts { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem .9rem; margin: 0 0 1rem; }
+.readouts div { min-width: 0; }
+.readouts dt { font-size: .75rem; color: var(--muted); }
+.readouts dd { margin: 0; font-size: 1.3rem; font-weight: 700; letter-spacing: -0.01em; }
+.sub { font-size: .78rem; color: var(--muted); margin: -.4rem 0 .9rem; }
+.metrics { display: flex; flex-wrap: wrap; gap: .3rem; margin-bottom: .5rem; }
+.metrics button { font: .78rem var(--sans); background: transparent; color: var(--ink-2); border: 1px solid var(--ring); border-radius: 999px; padding: .25rem .65rem; cursor: pointer; }
+.metrics button[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.chart-wrap { position: relative; }
+.chart { width: 100%; height: auto; display: block; touch-action: pan-y; }
+.chart text { font: 10.5px var(--sans); fill: var(--muted); }
+.chart .grid { stroke: var(--grid); stroke-width: 1; }
+.chart .axis { stroke: var(--axis); stroke-width: 1; }
+.chart .line { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.chart .l-compute { stroke: var(--s-compute); stroke-width: 2; }
+.chart .l-balanced { stroke: var(--s-balanced); stroke-width: 2; }
+.chart .l-people { stroke: var(--s-people); stroke-width: 2; }
+.chart .l-mine { stroke: var(--ink); stroke-width: 2.5; stroke-dasharray: 6 4; }
+.chart .m-compute { fill: var(--s-compute); } .chart .m-balanced { fill: var(--s-balanced); }
+.chart .m-people { fill: var(--s-people); } .chart .m-mine { fill: var(--ink); }
+.chart .dot { stroke: var(--surface); stroke-width: 2; }
+.chart .now { stroke: var(--ink); stroke-width: 1; opacity: .35; }
+.chart .hover { stroke: var(--ink-2); stroke-width: 1; }
+.tip { position: absolute; pointer-events: none; background: var(--surface); border: 1px solid var(--axis); border-radius: 8px; padding: .5rem .65rem;
+  font-size: .78rem; line-height: 1.45; white-space: nowrap; box-shadow: 0 4px 14px rgba(0,0,0,.12); z-index: 5; }
+.tip b { display: block; margin-bottom: .15rem; }
+.tip i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: .4rem; }
+.legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .78rem; color: var(--ink-2); margin: .5rem 0 .25rem; padding: 0; list-style: none; }
+.legend i { display: inline-block; width: 16px; height: 0; border-top: 3px solid var(--c); vertical-align: middle; margin-right: .35rem; }
+.legend .mine i { border-top-style: dashed; }
+details { margin-top: .5rem; font-size: .8rem; }
+summary { cursor: pointer; color: var(--ink-2); }
+table { width: 100%; border-collapse: collapse; margin-top: .5rem; font-variant-numeric: tabular-nums; }
+caption { text-align: left; color: var(--muted); padding-bottom: .25rem; }
+th, td { text-align: right; padding: .2rem .3rem; border-bottom: 1px solid var(--grid); }
+th:first-child, td:first-child { text-align: left; }
+.panel-toggle { display: none; }
+
+.sources { font-family: var(--sans); font-size: .85rem; color: var(--ink-2); max-width: 72rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; border-top: 1px solid var(--grid); }
+.sources h2 { font-size: 1.1rem; font-family: var(--sans); }
+.sources ol { padding-left: 1.3rem; columns: 2 22rem; column-gap: 2.5rem; }
+.sources li { margin-bottom: .45rem; break-inside: avoid; }
+.sources p { max-width: 46rem; }
+
+/* Narrow screens: the panel becomes a bottom sheet */
+@media (max-width: 62rem) {
+  .layout { display: block; padding-bottom: 9rem; }
+  .essay { max-width: none; }
+  .presets { grid-template-columns: 1fr; }
+  .panel { position: fixed; left: .5rem; right: .5rem; bottom: .5rem; top: auto; z-index: 20; max-height: 82vh; overflow: auto; padding: .8rem 1rem; box-shadow: 0 -4px 24px rgba(0,0,0,.18); }
+  .panel .collapsible { display: none; }
+  .panel.open .collapsible { display: block; }
+  .panel-year { font-size: 2rem; }
+  .panel-toggle { display: inline-block; font: .8rem var(--sans); background: transparent; color: var(--ink); border: 1px solid var(--ring); border-radius: 6px; padding: .3rem .7rem; cursor: pointer; margin-top: .6rem; }
+  .readouts dd { font-size: 1.1rem; }
+  .theme-toggle { top: -2.2rem; }
+}
+
+@media (max-width: 62rem) {
+  .panel:not(.open) .years, .panel:not(.open) .sub { display: none; }
+  .panel:not(.open) .readouts { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .4rem; margin-bottom: 0; }
+  .panel:not(.open) .readouts dt { font-size: .65rem; }
+  .panel:not(.open) .readouts dd { font-size: .95rem; }
+  .panel:not(.open) .panel-head { margin-bottom: .5rem; }
+  .panel:not(.open) .panel-title { display: none; }
+}
+
+/* Rubric-driven additions: scenario comparison, assumptions, Industry Week slot */
+.figure table { font-size: .82rem; }
+.figure th, .figure td { text-align: left; vertical-align: top; padding: .35rem .4rem; }
+.figure td:not(:first-child) { text-align: left; }
+#compare th:not(:first-child), #compare td { text-align: right; }
+#compare table { width: 100%; }
+.figure summary { font-weight: 600; font-size: .95rem; color: var(--ink); }
+.figure details, details.figure { margin-top: 1.5rem; }
+.todo { font-family: var(--sans); font-size: .9rem; background: transparent; border: 2px dashed var(--s-compute); border-radius: 8px; padding: .8rem 1rem; margin: 1.5rem 0; color: var(--ink-2); }
+.todo p { margin: .35rem 0 0; }
+.ending .prose + .prose { margin-top: 0; }
+@media (max-width: 62rem) { #compare table, #assumptions table { display: block; overflow-x: auto; } }
+
+</style>
+  
+  
+</head>
+<body>
+<a class="skip" href="#essay">Skip to the essay</a>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <button class="theme-toggle" id="theme-toggle" type="button">Switch theme</button>
+    <h1>Powered by Mountains</h1>
+    <p class="deck">A balanced scenario for how AI could reshape Bhutan's economy, and what Gelephu Mindfulness City has to get right. 2026 to 2032.</p>
+    <p class="byline">[Your name], [Course code], October 2026</p>
+    <p class="how-to">Scroll to move through time: the panel redraws for each year. In the 2029 section, change the choices yourself and watch the ending move.</p>
+  </div>
+</header>
+
+<div class="layout">
+<main id="essay" class="essay">
+
+  <section class="entry" data-year-idx="0">
+    <p class="date">A note before we start</p>
+    <h2>A scenario, not a prophecy</h2>
+    <p class="prose">This essay borrows the format of AI 2027: a dated story, written to be argued with. Facts come from the sources listed at the end. Projections come from a small model whose assumptions you can inspect and change, and the panel beside the text redraws as you scroll and as you move the sliders.</p>
+    <p class="prose">The argument is balanced. AI will make Bhutan's greatest physical asset, cheap hydropower, more valuable than ever. It will also weaken the route that educated young Bhutanese would otherwise take into service jobs. Gelephu Mindfulness City (GMC) sits where those forces meet, and the outcome depends less on technology than on a few budget decisions between now and 2029.</p>
+  </section>
+
+  <section class="entry" data-year-idx="0">
+    <p class="date">October 2026</p>
+    <h2>A small economy with one big asset</h2>
+    <p class="prose">Bhutan has fewer than 800,000 people and an economy of roughly US$3.8 billion. It is growing fast: the World Bank projects 7.1 percent for 2025/26 and 6.4 percent the year after, driven mostly by new hydropower.<sup><a href="#src-1">[1]</a><a href="#src-2">[2]</a></sup> Tourism is recovering, with 181,516 arrivals in 2025, a quarter more than the year before.<sup><a href="#src-3">[3]</a></sup> Hydropower supplied around 2.5 gigawatts in 2024.<sup><a href="#src-4">[4]</a></sup></p>
+    <p class="prose">The weak spot is people. Youth unemployment stands near 20.6 percent on the World Bank's April 2026 reading, though other series put it nearer 17 percent, and roughly nine percent of Bhutanese now live abroad.<sup><a href="#src-1">[1]</a></sup> Growth has not yet become enough work that young graduates want.</p>
+    <p class="prose">Into this comes GMC. The King announced it in December 2023, and a royal charter established it a year later as a Special Administrative Region of about 2,500 square kilometres in Sarpang, on the Indian border.<sup><a href="#src-6">[6]</a></sup> Its stated purpose is a hub for conscious, sustainable business rooted in Bhutan's Buddhist heritage. It has its own executive, legislative and judicial powers, a master plan by Bjarke Ingels Group and a governor in former Prime Minister Lotay Tshering.<sup><a href="#src-7">[7]</a></sup> More than 16,000 volunteers gathered there in February 2026.<sup><a href="#src-8">[8]</a></sup> What does not yet exist is the city itself.</p>
+  </section>
+
+  <section class="entry" data-year-idx="1">
+    <p class="date">2026 to 2027</p>
+    <h2>Power becomes the product</h2>
+    <p class="prose">AI has changed what electricity is worth. Large models need dense, reliable, low-carbon power, and many countries cannot supply it quickly. India, the nearest big market, is one of them: data centre growth there is held back by power availability and slow grid expansion.<sup><a href="#src-9">[9]</a></sup> Bhutan, with an almost entirely renewable river-fed grid, has the opposite problem: power, and little to do with it except export it.</p>
+    <p class="prose">The first moves have happened. Bitdeer opened a Bitcoin mining facility at Jigmeling in 2025, planned at 500 megawatts.<sup><a href="#src-10">[10]</a></sup> In July 2026 the Canadian firm SATO signed a letter of intent with the GMC Authority for a hydro-powered AI data centre campus, starting near 5 megawatts, with reports of 100 megawatts or more later.<sup><a href="#src-11">[11]</a><a href="#src-12">[12]</a></sup> A letter of intent is not a contract, and SATO was still talking to lenders when it announced the plan.<sup><a href="#src-13">[13]</a></sup></p>
+    <p class="prose">Funding is just as unusual. In December 2025 the government pledged up to 10,000 Bitcoin to GMC, but holdings had already fallen from roughly 13,000 to about 5,400 by March 2026, so the pledge holds only if mining keeps refilling the reserve.<sup><a href="#src-14">[14]</a></sup> GMC's early construction is, in effect, paid for by selling hydropower in digital form.</p>
+  </section>
+
+  <section class="entry" data-year-idx="2">
+    <p class="date">2027 to 2028</p>
+    <h2>The arithmetic problem</h2>
+    <p class="prose">Here is the first honest complication. A data centre running at 100 megawatts all year uses about 876 gigawatt-hours. At a few US cents per kilowatt-hour, an assumption, that is tens of millions of dollars. The model uses US$0.35 million per megawatt each year, so 100 megawatts earns about US$35 million, under one percent of GDP, and 500 megawatts about US$175 million, a little over three percent. Real money, but not a transformation.</p>
+    <p class="prose">The jobs arithmetic is harsher. A data centre needs a few engineers, electricians and security staff, not thousands of workers. The model assumes 0.6 operating jobs per megawatt, so 150 megawatts supports about 90 permanent jobs. Compute is a good source of revenue and a poor source of employment.</p>
+    <p class="prose">Risks add up. Run-of-river hydropower is seasonal, an AI customer wants power every hour, chips are governed by export rules written elsewhere, and most of Bhutan's trade runs through India, also the likeliest customer. None of this kills the plan. All of it argues against betting on a single engine.</p>
+  </section>
+
+  <section class="entry" data-year-idx="2">
+    <p class="date">2028 to 2030</p>
+    <h2>Four ways AI reaches the economy</h2>
+    <p class="prose">Economists usually trace AI's effects through four channels: productivity, tasks, wages and structure. Each plays out differently in a small, hydropower-rich economy, and the model draws on all four.</p>
+    <p class="prose"><b>Productivity.</b> Better tools raise output per worker. About 42 percent of employed Bhutanese still work in agriculture, so modest gains from crop advice, weather forecasts or market information could matter more to household incomes than any server hall.<sup><a href="#src-16">[16]</a></sup> Tourism and public services could gain too. These gains depend on adoption and arrive slowly, so the model leaves them out of its headline numbers.</p>
+    <p class="prose"><b>Tasks.</b> AI replaces tasks, not whole jobs, and it handles routine cognitive ones best: customer support, data entry, bookkeeping, basic coding. Developing economies have often climbed from farming into exactly this work. If that ladder weakens as Bhutan's graduates reach it, the effect lands on a group already struggling. In the model this is the "AI squeeze", worth up to four points of youth unemployment by 2032.</p>
+    <p class="prose"><b>Wages.</b> Workers who use AI well may earn more while entry-level pay comes under pressure. Emigration is Bhutan's wage safety valve: it rose sharply after the pandemic among young, skilled people and civil servants, and Australia is among the destinations.<sup><a href="#src-15">[15]</a></sup> A worker who can earn more abroad has little reason to wait for a local job.</p>
+    <p class="prose"><b>Structure.</b> Compute turns electricity into an export, shifting weight toward energy and capital and away from labour. The arithmetic problem above is this channel at work: more revenue, few jobs.</p>
+    <p class="prose"><b>Why 2032?</b> Data centres take years to finance and build, while AI capabilities beyond about 2030 are too uncertain to forecast with discipline. Six years is long enough for GMC's first phases to show results, and short enough to keep the assumptions honest.</p>
+  </section>
+
+  <section class="entry" id="decision" data-year-idx="3">
+    <p class="date">2029</p>
+    <h2>The decision nobody announces</h2>
+    <p class="prose">Around 2029, GMC faces a choice that will not be presented as one. It will arrive as budget lines: how much land and power to commit to compute, what share of proceeds to put into schools, training and research, and how hard to work at bringing Bhutanese talent home.</p>
+    <p class="prose">Three stylised strategies follow. Compute first goes up to 500 megawatts with little reinvested. Balanced build adds moderate compute and reinvests a quarter. People first limits compute, reinvests more than half and treats talent retention as the main product. Pick one or set the sliders yourself. The world is the same in each case; only the choices differ.</p>
+
+    <div class="figure" id="controls">
+      <h3>Set the strategy</h3>
+      <p class="hint">Everything in the panel, and the endings below, updates as you move these.</p>
+      <div class="presets" role="group" aria-label="Preset strategies">
+        <button class="preset" type="button" data-preset="compute" aria-pressed="false"><b>Compute first</b><span>500 MW, little reinvested</span></button>
+        <button class="preset" type="button" data-preset="balanced" aria-pressed="true"><b>Balanced build</b><span>150 MW, a quarter reinvested</span></button>
+        <button class="preset" type="button" data-preset="people" aria-pressed="false"><b>People first</b><span>80 MW, most reinvested</span></button>
+      </div>
+      <fieldset>
+        <legend>Your choices</legend>
+        <div class="slider"><label for="in-mw">Data centre capacity online by 2032</label><output id="out-mw" for="in-mw"></output>
+          <input id="in-mw" type="range" min="0" max="500" step="10"></div>
+        <div class="slider"><label for="in-reinvest">Share of proceeds reinvested in skills and institutions</label><output id="out-reinvest" for="in-reinvest"></output>
+          <input id="in-reinvest" type="range" min="0" max="100" step="5"></div>
+        <div class="slider"><label for="in-retain">Effort to keep and bring home Bhutanese talent</label><output id="out-retain" for="in-retain"></output>
+          <input id="in-retain" type="range" min="0" max="100" step="5"></div>
+      </fieldset>
+      <fieldset>
+        <legend>The world (outside Bhutan's control)</legend>
+        <div class="slider"><label for="in-automation">How hard AI hits entry-level services work</label><output id="out-automation" for="in-automation"></output>
+          <input id="in-automation" type="range" min="0" max="100" step="5"></div>
+        <div class="slider"><label for="in-btc">Bitcoin price, against a US$100,000 reference</label><output id="out-btc" for="in-btc"></output>
+          <input id="in-btc" type="range" min="0.5" max="2" step="0.1"></div>
+      </fieldset>
+      <button class="reset" id="reset" type="button">Reset to balanced build</button>
+    </div>
+
+    <div class="live" id="live-decision" data-ending="middle" aria-live="polite"></div>
+
+    <p class="prose">A caution on reading the results: the coefficients are judgement calls and the thresholds for the endings are mine. What the exercise shows more reliably is the shape. Compute revenue grows with every megawatt, but its effect on youth unemployment flattens quickly, while spending on people keeps paying off for longer.</p>
+  </section>
+
+  <section class="entry" id="policy" data-year-idx="4">
+    <p class="date">2030</p>
+    <h2>Policy levers and what they cost</h2>
+    <p class="prose">Each strategy in the model is a bundle of policies, and each policy has a price. Four matter most.</p>
+    <ul class="list">
+      <li class="prose"><b>A reinvestment rule.</b> Fixing a share of compute and Bitcoin proceeds for skills protects it from short-term spending, but removes flexibility when prices fall. Training without local jobs at the end of it can also produce better-qualified emigrants, an effect the model does not capture.</li>
+      <li class="prose"><b>Local hiring conditions on data centre licences.</b> These spread the benefits at home, but can deter investors who want speed, and invite token hiring that satisfies the rule without building skills.</li>
+      <li class="prose"><b>Treasury rules for Bitcoin.</b> A rule for how much to sell, and when, gives GMC predictable funds. Without one, spending follows the price, and sales in a downturn lock in losses.</li>
+      <li class="prose"><b>Legal independence.</b> GMC can write its own rules for data, AI use and visas faster than a national parliament. The trade-off is credibility, since investors will price the quality of its courts and regulators. Higher pay and different rules inside GMC could also pull workers away from the rest of Bhutan.</li>
+    </ul>
+    <p class="prose">The model treats these as dials, but someone must turn them. Each trade-off is cheapest to settle in writing before the money arrives.</p>
+
+    <aside class="todo" id="industry-week">
+      <b>Industry Week slot (not yet written)</b>
+      <p>Add one specific, attributed idea from Industry Week here: who said it, in which session, and when. Summarise it in two sentences, then test it against Bhutan: where it holds, where it breaks, and how it changes the analysis above. About 150 words. Delete this box when done and re-run <code>npm run wordcount</code>.</p>
+    </aside>
+  </section>
+
+  <section class="entry" id="endings" data-year-idx="6">
+    <p class="date">2030 to 2032</p>
+    <h2>Baseline, upside and downside</h2>
+    <p class="prose">By 2032 the paths have separated. These three scenarios use the model's presets. The card matching your settings is outlined, and the table compares them.</p>
+    <div class="endings">
+      <article class="ending" data-ending="middle">
+        <h3>Baseline: the uneven middle <span class="tag">Your settings</span></h3>
+        <p class="prose">The most likely outcome, in my judgement. GMC attracts jobs in construction, hospitality, finance and education alongside a moderate compute campus. Youth unemployment settles around 16.6 percent. Some talent returns and much still leaves. It is neither triumph nor failure, and the choices of 2029 can still improve it.</p>
+      </article>
+      <article class="ending" data-ending="hub">
+        <h3>Upside: the mindful hub <span class="tag">Your settings</span></h3>
+        <p class="prose">GMC ends up smaller in compute and larger in human capacity. Revenue is modest, about US$28 million a year, yet reinvestment in training, research and returnee incentives pulls youth unemployment toward 14.6 percent and holds emigration near 10 percent. Mindfulness becomes a product: trusted, human-centred education, care and governance in a world full of synthetic output.</p>
+      </article>
+      <article class="ending" data-ending="empty">
+        <h3>Downside: powered but empty <span class="tag">Your settings</span></h3>
+        <p class="prose">The data centres run at full load and the revenue is real, but few Bhutanese work in them. Youth unemployment improves only to roughly 18 percent, and the share living abroad climbs above 11 percent. GMC has buildings and a balance sheet, but its identity as a mindfulness city is mostly a slogan.</p>
+      </article>
+    </div>
+    <div class="figure" id="compare"><h3>Scenario comparison, 2032</h3><p class="hint">Model output. Values change with your sliders in the last column.</p><div id="compare-table"></div></div>
+    <p class="prose">The strongest argument for the mindfulness brand is scarcity: as AI floods the world with cheap content, places offering attention, trust and human presence may command a premium. The strongest argument against is that a brand hires no one. Unless backed by schools, firms and visas that work, "mindfulness" risks becoming a label on a data centre.</p>
+    <div class="live" id="live-endings" data-ending="middle" aria-live="polite"></div>
+  </section>
+
+  <section class="entry" id="method" data-year-idx="6">
+    <p class="date">Method</p>
+    <h2>How this was made</h2>
+    <p class="prose">The projections come from a transparent scenario model, not a trained forecasting system: seven yearly steps, five levers and a short list of assumptions, shown below and in the repository. Starting values come from the sources at the end; the coefficients are my judgement and are labelled that way.</p>
+    <p class="prose">AI tools helped in three places: web search to gather sources, an AI assistant to draft code and text, and the model itself as a way of testing arguments. Sources found this way need checking against the originals, and the repository records what still does.</p>
+    <p class="prose">The limits matter. There are no feedback loops, climate or political shocks, or unpredicted AI breakthroughs, and the link from skills to emigration runs one way, though training may sometimes help people leave. Treat the results as arguments in numerical form, not estimates.</p>
+    <details class="figure" id="assumptions"><summary>Every assumption in the model</summary><div id="assumptions-table"></div></details>
+  </section>
+
+  <section class="entry" data-year-idx="6">
+    <p class="date">What to watch</p>
+    <h2>What would change this forecast</h2>
+    <p class="prose">A forecast is useful only if it says what would prove it wrong. I would track these signals:</p>
+    <ul class="list">
+      <li class="prose">Letters of intent becoming financed contracts, and megawatts actually energised.</li>
+      <li class="prose">The share of data centre staff who are Bhutanese.</li>
+      <li class="prose">Bitcoin holdings against the 10,000-coin pledge.</li>
+      <li class="prose">Quarterly youth unemployment and emigration figures.</li>
+    </ul>
+    <p class="prose">Slow energisation, mostly imported staff and rising emigration would push me toward the downside. Local hiring, a working research institute and returning graduates would push me toward the upside.</p>
+    <p class="prose">Bhutan does not need to choose between selling electricity and building people. It does need to decide, early and in writing, how much of the first will pay for the second.</p>
+  </section>
+</main>
+
+<aside class="panel" id="panel" aria-label="Scenario panel">
+  <div class="panel-head">
+    <div class="panel-year" id="p-year">2026</div>
+    <div class="panel-title">Bhutan under<br>your settings</div>
+  </div>
+  <div class="years" id="years" role="group" aria-label="Choose a year"></div>
+  <dl class="readouts">
+    <div><dt>Youth unemployment</dt><dd id="r-yu"></dd></div>
+    <div><dt>Living abroad</dt><dd id="r-em"></dd></div>
+    <div><dt>GDP</dt><dd id="r-gdp"></dd></div>
+    <div><dt>Compute revenue</dt><dd id="r-rev"></dd></div>
+  </dl>
+  <p class="sub" id="r-sub"></p>
+  <div class="collapsible">
+    <div class="metrics" id="metrics" role="group" aria-label="Chart measure"></div>
+    <div class="chart-wrap" id="chart-wrap">
+      <svg class="chart" id="chart" viewBox="0 0 340 210" role="img" aria-label="Line chart comparing the three strategies and your settings" tabindex="0"></svg>
+      <div class="tip" id="tip" hidden></div>
+    </div>
+    <ul class="legend" id="legend"></ul>
+    <details><summary>View as table</summary><table id="table"></table></details>
+  </div>
+  <button class="panel-toggle" id="panel-toggle" type="button" aria-expanded="false">Show chart</button>
+</aside>
+</div>
+
+<footer class="sources" id="sources">
+  <h2>Sources and notes</h2>
+  <ol>
+    <li id="src-1">World Bank, <a href="https://www.worldbank.org/en/news/press-release/2026/04/09/bhutan-s-growth-outlook-remains-strong">Bhutan's growth outlook remains strong</a>, 9 April 2026.</li>
+    <li id="src-2">Fundsforngos summary of World Bank growth projections, <a href="https://news.fundsforngos.org/2026/04/10/bhutan-growth-outlook-strong-but-job-creation-needs-acceleration/">April 2026</a>.</li>
+    <li id="src-3">Ministry of Finance, Bhutan, <a href="https://mof.gov.bt/wp-content/uploads/2026/02/Strong-Momentum-in-2025-Moderation-Ahead_-Bhutans-Economic-Outlook-Second-Quarter-Update-FY-2025-26-.pdf">Economic Outlook, Q2 FY2025/26</a>.</li>
+    <li id="src-4">BTW Media, <a href="https://btw.media/en/sato-plans-ai-data-centre-in-bhutan">SATO plans AI data centre in Bhutan</a> (2024 hydropower figure).</li>
+    <li id="src-5">The Bhutanese, <a href="https://thebhutanese.bt/dhi-proposes-ai-data-center-powered-entirely-by-renewable-energy/">DHI proposes AI data center powered entirely by renewable energy</a>.</li>
+    <li id="src-6">Little Bhutan, <a href="https://littlebhutan.com/attractions/sarpang/gelephu-mindfulness-city/">Gelephu Mindfulness City</a> (announcement and charter dates).</li>
+    <li id="src-7">Druk Asia, <a href="https://www.drukasia.com/bhutan/gelephu/">Gelephu</a> (master plan, governor, SAR powers).</li>
+    <li id="src-8">Asia News Network, <a href="https://asianews.network/?p=259241">King and citizens work side by side in Bhutan's GMC</a>.</li>
+    <li id="src-9">Stockwatch, <a href="https://wwww.stockwatch.com/News/Item/Z-C!SATO-3838761/C/SATO">Sato Technologies enters LOI for Bhutanese data centre</a>, 6 July 2026 (India's power constraints).</li>
+    <li id="src-10">Datacentermap, <a href="https://www.datacentermap.com/bhutan/sarpang/bitdeer-jigmeling/">Bitdeer Jigmeling</a>.</li>
+    <li id="src-11">Blockspace, <a href="https://blockspace.media/short/why-sato-is-building-an-ai-data-center-in-bhutan/">Why SATO is building an AI data center in Bhutan</a>.</li>
+    <li id="src-12">Blockspace, <a href="https://blockspace.media/insight/sato-bhutan-hydro-powered-ai-campus/">SATO signs letter of intent ... targeting 100 MW</a>.</li>
+    <li id="src-13">Ion Analytics, <a href="https://ionanalytics.com/insights/uncategory/canadian-bitcoin-miner-sato-in-bhutan-data-centre-capital-raise/">SATO in Bhutan data centre capital raise</a>.</li>
+    <li id="src-14">IT News Africa, <a href="https://www.itnewsafrica.com/2026/03/bitcoin-as-public-infrastructure-how-bhutan-plans-to-build-a-city-on-btc/">Bitcoin as public infrastructure</a>, March 2026.</li>
+    <li id="src-15">World Bank, <a href="https://www.worldbank.org/en/news/press-release/2025/05/26/bhutan-maintains-robust-growth-with-migration-playing-key-roles">Bhutan maintains robust growth</a>, May 2025 (emigration profile). The mention of Australia as a destination is general background and should be checked against a dedicated source.</li>
+    <li id="src-16">Statistics of the World, <a href="https://statisticsoftheworld.com/country/bhutan">Bhutan country indicators</a> (employment in agriculture, 42.4 percent in 2025; compiled from World Bank data, so verify against the primary series).</li>
+  </ol>
+  <p>Model assumptions, formulas and limits are documented in the repository README. Statements about seasonal hydropower and about trade dependence on India are background knowledge, not from a cited source, and are flagged for checking in SOURCES.md.</p>
+</footer>
+<script>
+/*
+ * Bhutan 2032 scenario model
+ * --------------------------
+ * A deliberately simple, transparent model. It is NOT a forecast engine:
+ * every coefficient marked "assumption" is a judgement call, documented in
+ * README.md so a reader can disagree with it and change it.
+ *
+ * Works in the browser (window.BhutanModel) and in Node (module.exports).
+ */
+(function (root, factory) {
+  if (typeof module === "object" && module.exports) module.exports = factory();
+  else root.BhutanModel = factory();
+})(typeof self !== "undefined" ? self : this, function () {
+  "use strict";
+
+  var YEARS = [2026, 2027, 2028, 2029, 2030, 2031, 2032];
+
+  // Sourced starting points (see SOURCES.md)
+  var START = {
+    gdpBn: 3.8,          // approx. GDP 2026, US$ bn (estimates range 3.77 to 3.86)
+    youthUnemp: 20.6,    // World Bank, April 2026 (other sources: ~17%)
+    emigrantShare: 9.0,  // % of population living abroad, World Bank, 2025
+    btcHoldings: 5400    // approx. BTC held, March 2026 (Arkham via press)
+  };
+
+  // Assumptions
+  var A = {
+    btcRefPriceUsd: 100000,                 // illustrative reference price, NOT a forecast
+    rampShare: [0, 0.05, 0.15, 0.35, 0.6, 0.85, 1], // share of target MW online each year
+    revenuePerMwUsdM: 0.35,                 // US$ m per MW-year captured by Bhutan (power sales, fees, tax)
+    directJobsPerMw: 0.6,                   // operating jobs per MW
+    treasurySalesShare: 0.12,               // share of BTC treasury value channelled to GMC per year
+    computeRevenueToGmc: 0.25,              // share of compute revenue that reaches GMC capital
+    gdpBaseGrowth: [0, 6.4, 5.5, 5.0, 4.8, 4.6, 4.5], // % per year; 2027 from World Bank, rest assumed
+    gdpRevenueMultiplier: 1.5,
+    gdpSpendMultiplier: 0.6,
+    automationPushMaxPp: 4.0,               // max rise in youth unemployment from AI squeeze on services jobs
+    dcPullMaxPp: 3.0, dcPullScaleMw: 150,
+    gmcPullMaxPp: 3.5, gmcPullScaleUsdM: 400,
+    skillsPullMaxPp: 6.0, skillsPullScaleUsdM: 60,
+    emigrationBasePp: 0.5,                  // annual rise in emigrant share at 20.6% youth unemployment, no retention effort
+    retentionDamping: 0.6
+  };
+
+  var DEFAULTS = { mw: 150, reinvest: 0.25, automation: 0.5, btc: 1, retain: 0.5 }; // = balanced build
+
+  // Named strategies used by the 2028 decision point
+  var PRESETS = {
+    // Same world (automation, Bitcoin price), different choices.
+    compute:  { mw: 500, reinvest: 0.05, automation: 0.5, btc: 1, retain: 0.1, label: "Compute first" },
+    balanced: { mw: 150, reinvest: 0.25, automation: 0.5, btc: 1, retain: 0.5, label: "Balanced build" },
+    people:   { mw: 80,  reinvest: 0.6,  automation: 0.5, btc: 1, retain: 1.0, label: "People first" }
+  };
+
+  function clamp(x, lo, hi) { return Math.min(hi, Math.max(lo, x)); }
+  function expSat(x, scale) { return 1 - Math.exp(-x / scale); }
+
+  function run(input) {
+    var p = {};
+    for (var k in DEFAULTS) p[k] = input && input[k] != null ? +input[k] : DEFAULTS[k];
+    p.mw = clamp(p.mw, 0, 1000);
+    p.reinvest = clamp(p.reinvest, 0, 1);
+    p.automation = clamp(p.automation, 0, 1);
+    p.btc = clamp(p.btc, 0.1, 5);
+    p.retain = clamp(p.retain, 0, 1);
+
+    var n = YEARS.length;
+    var out = { params: p, years: YEARS.slice(), mw: [], revenue: [], jobs: [], gmcCapital: [],
+                skills: [], gdp: [], youthUnemp: [], emigrants: [] };
+
+    var gdpBase = START.gdpBn;
+    var treasuryAnnualUsdM = START.btcHoldings * A.btcRefPriceUsd * p.btc / 1e6 * A.treasurySalesShare;
+
+    for (var t = 0; t < n; t++) {
+      var mw = p.mw * A.rampShare[t];
+      var rev = mw * A.revenuePerMwUsdM;
+      var cap = treasuryAnnualUsdM + A.computeRevenueToGmc * rev;
+      var skills = p.reinvest * (rev + 0.3 * cap);
+      out.mw.push(mw);
+      out.revenue.push(rev);
+      out.jobs.push(mw * A.directJobsPerMw);
+      out.gmcCapital.push(cap);
+      out.skills.push(skills);
+
+      if (t > 0) gdpBase *= 1 + A.gdpBaseGrowth[t] / 100;
+      out.gdp.push(gdpBase + (A.gdpRevenueMultiplier * rev + A.gdpSpendMultiplier * cap) / 1000);
+
+      // Lagged cumulative effects: GMC capital works with a 1-year lag, skills with a 2-year lag.
+      var capCum = 0, skillCum = 0, i;
+      for (i = 0; i <= t - 1; i++) capCum += out.gmcCapital[i];
+      for (i = 0; i <= t - 2; i++) skillCum += out.skills[i];
+
+      // Skilled workers are more resilient to AI: skills spending cuts the squeeze (assumption).
+      var push = A.automationPushMaxPp * p.automation * (t / (n - 1)) * (1.3 - 0.6 * p.reinvest);
+      var pullDc = A.dcPullMaxPp * expSat(mw, A.dcPullScaleMw);
+      // GMC capital creates more local jobs when it is aimed at local talent (assumption).
+      var pullGmc = A.gmcPullMaxPp * expSat(capCum, A.gmcPullScaleUsdM) * (0.3 + 0.7 * p.retain);
+      var pullSkills = A.skillsPullMaxPp * expSat(skillCum, A.skillsPullScaleUsdM);
+      var yu = START.youthUnemp + push - pullDc - pullGmc - pullSkills;
+      yu = clamp(yu, 3, 40);
+      out.youthUnemp.push(yu);
+
+      if (t === 0) out.emigrants.push(START.emigrantShare);
+      else {
+        var step = A.emigrationBasePp * (yu / START.youthUnemp) * (1 - A.retentionDamping * p.retain);
+        out.emigrants.push(out.emigrants[t - 1] + step);
+      }
+    }
+
+    var last = n - 1;
+    out.summary = {
+      gdp2032: out.gdp[last],
+      revenue2032: out.revenue[last],
+      jobs2032: out.jobs[last],
+      youthUnemp2032: out.youthUnemp[last],
+      emigrants2032: out.emigrants[last],
+      revenueShareOfGdp: out.revenue[last] / (out.gdp[last] * 1000) * 100
+    };
+    out.ending = classify(out.summary);
+    return out;
+  }
+
+  // Three endings. Thresholds are judgement calls, documented in the README.
+  function classify(s) {
+    if (s.youthUnemp2032 >= 17.5) return "empty";
+    if (s.youthUnemp2032 <= 15) return "hub";
+    return "middle";
+  }
+
+  return { YEARS: YEARS, START: START, ASSUMPTIONS: A, DEFAULTS: DEFAULTS, PRESETS: PRESETS,
+           run: run, classify: classify };
+});
+
+</script>
+<script>
+/* Powered by Mountains: interaction layer. Depends on assets/model.js. */
+(function () {
+  "use strict";
+  var M = window.BhutanModel;
+  var $ = function (id) { return document.getElementById(id); };
+  var NS = "http://www.w3.org/2000/svg";
+
+  var ENDING = {
+    empty: "the downside, powered but empty",
+    middle: "the baseline, the uneven middle",
+    hub: "the upside, the mindful hub"
+  };
+
+  // Every model assumption, with its basis. kind: "sourced" | "assumed" | "illustrative".
+  var ASSUMPTIONS = [
+    ["Youth unemployment, 2026", "20.6%", "sourced", "World Bank, April 2026 (other series show about 17%)"],
+    ["Population living abroad, 2025", "9%", "sourced", "World Bank, April 2026"],
+    ["GDP, 2026", "US$3.8 bn", "sourced", "Estimates range US$3.77 to 3.86 bn"],
+    ["Bitcoin held, March 2026", "5,400 BTC", "sourced", "On-chain data reported by IT News Africa (secondary)"],
+    ["GDP growth, 2027", "6.4%", "sourced", "World Bank projection for FY26/27"],
+    ["GDP growth, 2028 to 2032", "5.5% fading to 4.5%", "assumed", "Gradual slowdown as hydropower construction ends"],
+    ["Revenue per MW-year to Bhutan", "US$0.35 m", "assumed", "About 876 GWh per 100 MW at roughly US$0.04 per kWh"],
+    ["Operating jobs per MW", "0.6", "assumed", "Data centres run on small technical teams"],
+    ["Capacity online, 2026 to 2032", "0, 5, 15, 35, 60, 85, 100% of target", "assumed", "Financing and build lags of several years"],
+    ["Bitcoin reference price", "US$100,000", "illustrative", "Not a forecast; the slider scales it from 0.5x to 2x"],
+    ["Treasury value sent to GMC each year", "12%", "assumed", "Judgement; no official schedule is published"],
+    ["Compute revenue reaching GMC capital", "25%", "assumed", "Judgement"],
+    ["GDP multipliers", "1.5 on revenue, 0.6 on GMC spending", "assumed", "Judgement, deliberately modest"],
+    ["AI squeeze on youth unemployment", "up to +4.0 points by 2032", "assumed", "Judgement; multiplied by 1.3 with no reinvestment, down to 0.7 with full reinvestment"],
+    ["Pull of data centres on youth unemployment", "up to 3.0 points, saturating at 150 MW scale", "assumed", "Diminishing returns because jobs per MW are low"],
+    ["Pull of GMC capital on youth unemployment", "up to 3.5 points, saturating at US$400 m", "assumed", "One-year lag; works better when aimed at local talent"],
+    ["Pull of skills spending on youth unemployment", "up to 6.0 points, saturating at US$60 m", "assumed", "Two-year lag"],
+    ["Emigration step", "0.5 points a year at 20.6% youth unemployment", "assumed", "Scaled by unemployment; damped up to 60% by retention effort"],
+    ["Ending thresholds", "Downside at 17.5% or more; upside at 15% or less", "assumed", "Chosen thresholds, not findings"]
+  ];
+
+  var METRICS = {
+    youthUnemp: { label: "Youth unemployment", short: "Youth unemp.", fmt: function (v) { return v.toFixed(1) + "%"; }, tick: function (v) { return v + "%"; } },
+    emigrants: { label: "Living abroad", short: "Abroad", fmt: function (v) { return v.toFixed(1) + "%"; }, tick: function (v) { return v + "%"; } },
+    gdp: { label: "GDP", short: "GDP", fmt: function (v) { return "US$" + v.toFixed(2) + "bn"; }, tick: function (v) { return v + "bn"; } },
+    revenue: { label: "Compute revenue", short: "Compute rev.", fmt: function (v) { return "US$" + Math.round(v) + "m"; }, tick: function (v) { return v + "m"; } }
+  };
+
+  var SERIES = [
+    { key: "compute", name: "Compute first", cls: "compute" },
+    { key: "balanced", name: "Balanced build", cls: "balanced" },
+    { key: "people", name: "People first", cls: "people" },
+    { key: "mine", name: "Your settings", cls: "mine" }
+  ];
+
+  var presetRuns = {};
+  Object.keys(M.PRESETS).forEach(function (k) { presetRuns[k] = M.run(M.PRESETS[k]); });
+
+  var state = { params: copy(M.DEFAULTS), yearIdx: 0, metric: "youthUnemp", hover: null, mine: null };
+
+  function copy(o) { var c = {}; for (var k in o) c[k] = o[k]; return c; }
+  function pct(v) { return Math.round(v * 100); }
+
+  /* ---------- Controls ---------- */
+  var inputs = {
+    mw: $("in-mw"), reinvest: $("in-reinvest"), retain: $("in-retain"),
+    automation: $("in-automation"), btc: $("in-btc")
+  };
+  var scale = { mw: 1, reinvest: 100, retain: 100, automation: 100, btc: 1 };
+
+  function syncInputs() {
+    Object.keys(inputs).forEach(function (k) {
+      inputs[k].value = state.params[k] * scale[k];
+    });
+    $("out-mw").textContent = Math.round(state.params.mw) + " MW";
+    $("out-reinvest").textContent = pct(state.params.reinvest) + "%";
+    $("out-retain").textContent = pct(state.params.retain) + "%";
+    $("out-automation").textContent = pct(state.params.automation) + "%";
+    $("out-btc").textContent = "x" + state.params.btc.toFixed(1);
+    var buttons = document.querySelectorAll(".preset");
+    Array.prototype.forEach.call(buttons, function (b) {
+      var p = M.PRESETS[b.getAttribute("data-preset")];
+      var same = ["mw", "reinvest", "retain", "automation", "btc"].every(function (k) {
+        return Math.abs(p[k] - state.params[k]) < 1e-9;
+      });
+      b.setAttribute("aria-pressed", same ? "true" : "false");
+    });
+  }
+
+  Object.keys(inputs).forEach(function (k) {
+    inputs[k].addEventListener("input", function () {
+      state.params[k] = parseFloat(inputs[k].value) / scale[k];
+      update();
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll(".preset"), function (b) {
+    b.addEventListener("click", function () {
+      state.params = copy(M.PRESETS[b.getAttribute("data-preset")]);
+      delete state.params.label;
+      update();
+    });
+  });
+  $("reset").addEventListener("click", function () { state.params = copy(M.DEFAULTS); update(); });
+
+  /* ---------- Panel scaffolding ---------- */
+  function buildStatic() {
+    var years = $("years");
+    M.YEARS.forEach(function (y, i) {
+      var b = document.createElement("button");
+      b.type = "button"; b.textContent = y;
+      b.setAttribute("aria-pressed", i === 0 ? "true" : "false");
+      b.addEventListener("click", function () { state.yearIdx = i; update(); });
+      years.appendChild(b);
+    });
+    var metrics = $("metrics");
+    Object.keys(METRICS).forEach(function (k) {
+      var b = document.createElement("button");
+      b.type = "button"; b.textContent = METRICS[k].short; b.setAttribute("data-metric", k);
+      b.setAttribute("aria-pressed", k === state.metric ? "true" : "false");
+      b.addEventListener("click", function () { state.metric = k; update(); });
+      metrics.appendChild(b);
+    });
+    var legend = $("legend");
+    SERIES.forEach(function (s) {
+      var li = document.createElement("li");
+      if (s.key === "mine") li.className = "mine";
+      li.style.setProperty("--c", s.key === "mine" ? "var(--ink)" : "var(--s-" + s.cls + ")");
+      li.innerHTML = "<i></i>" + s.name;
+      legend.appendChild(li);
+    });
+  }
+
+  /* ---------- Readouts ---------- */
+  function renderReadouts() {
+    var i = state.yearIdx, r = state.mine;
+    $("p-year").textContent = M.YEARS[i];
+    $("r-yu").textContent = METRICS.youthUnemp.fmt(r.youthUnemp[i]);
+    $("r-em").textContent = METRICS.emigrants.fmt(r.emigrants[i]);
+    $("r-gdp").textContent = METRICS.gdp.fmt(r.gdp[i]);
+    $("r-rev").textContent = METRICS.revenue.fmt(r.revenue[i]);
+    $("r-sub").textContent = Math.round(r.mw[i]) + " MW online, about " + Math.round(r.jobs[i]) + " direct jobs";
+    Array.prototype.forEach.call($("years").children, function (b, k) {
+      b.setAttribute("aria-pressed", k === i ? "true" : "false");
+    });
+    Array.prototype.forEach.call($("metrics").children, function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-metric") === state.metric ? "true" : "false");
+    });
+  }
+
+  /* ---------- Chart ---------- */
+  var W = 340, H = 210, ML = 40, MR = 20, MT = 10, MB = 24;
+
+  function seriesValues(metric) {
+    return SERIES.map(function (s) {
+      var run = s.key === "mine" ? state.mine : presetRuns[s.key];
+      return { s: s, v: run[metric] };
+    });
+  }
+  function niceTicks(lo, hi, count) {
+    var span = hi - lo || 1, raw = span / count, mag = Math.pow(10, Math.floor(Math.log10(raw)));
+    var step = [1, 2, 2.5, 5, 10].map(function (m) { return m * mag; }).filter(function (s) { return s >= raw; })[0];
+    var start = Math.floor(lo / step) * step, ticks = [];
+    for (var t = start; t <= hi + step * 0.999; t += step) { ticks.push(+t.toFixed(6)); if (ticks.length > 8) break; }
+    return ticks;
+  }
+  function el(name, attrs) {
+    var n = document.createElementNS(NS, name);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    return n;
+  }
+
+  function renderChart() {
+    var svg = $("chart"), metric = state.metric, M_ = METRICS[metric];
+    var data = seriesValues(metric), n = M.YEARS.length;
+    var all = [].concat.apply([], data.map(function (d) { return d.v; }));
+    var lo = Math.min.apply(null, all), hi = Math.max.apply(null, all);
+    var pad = (hi - lo) * 0.12 || 1;
+    var ticks = niceTicks(lo - pad, hi + pad, 4);
+    var y0 = ticks[0], y1 = ticks[ticks.length - 1];
+    var x = function (i) { return ML + (W - ML - MR) * i / (n - 1); };
+    var y = function (v) { return MT + (H - MT - MB) * (1 - (v - y0) / (y1 - y0)); };
+
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+
+    ticks.forEach(function (t) {
+      svg.appendChild(el("line", { x1: ML, x2: W - MR, y1: y(t), y2: y(t), "class": t === y0 ? "axis" : "grid" }));
+      var tx = el("text", { x: ML - 6, y: y(t) + 3.5, "text-anchor": "end" });
+      tx.textContent = M_.tick(t); svg.appendChild(tx);
+    });
+    M.YEARS.forEach(function (yr, i) {
+      if (i % 2 === 0) {
+        var tx = el("text", { x: x(i), y: H - 7, "text-anchor": "middle" });
+        tx.textContent = yr; svg.appendChild(tx);
+      }
+    });
+
+    svg.appendChild(el("line", { x1: x(state.yearIdx), x2: x(state.yearIdx), y1: MT, y2: H - MB, "class": "now" }));
+
+    data.forEach(function (d) {
+      var path = d.v.map(function (v, i) { return (i ? "L" : "M") + x(i).toFixed(1) + " " + y(v).toFixed(1); }).join("");
+      svg.appendChild(el("path", { d: path, "class": "line l-" + d.s.cls }));
+    });
+    data.forEach(function (d) {
+      var i = state.yearIdx;
+      svg.appendChild(el("circle", { cx: x(i), cy: y(d.v[i]), r: d.s.key === "mine" ? 5 : 4, "class": "dot m-" + d.s.cls }));
+    });
+
+    if (state.hover != null) {
+      svg.appendChild(el("line", { x1: x(state.hover), x2: x(state.hover), y1: MT, y2: H - MB, "class": "hover" }));
+      data.forEach(function (d) {
+        svg.appendChild(el("circle", { cx: x(state.hover), cy: y(d.v[state.hover]), r: 4, "class": "dot m-" + d.s.cls }));
+      });
+    }
+
+    var hit = el("rect", { x: ML, y: MT, width: W - ML - MR, height: H - MT - MB, fill: "transparent" });
+    function idxFrom(evt) {
+      var r = svg.getBoundingClientRect();
+      var px = (evt.clientX - r.left) / r.width * W;
+      return Math.max(0, Math.min(n - 1, Math.round((px - ML) / (W - ML - MR) * (n - 1))));
+    }
+    hit.addEventListener("pointermove", function (e) { setHover(idxFrom(e), data, x, y, r_()); });
+    hit.addEventListener("pointerdown", function (e) { setHover(idxFrom(e), data, x, y, r_()); });
+    hit.addEventListener("pointerleave", function () { setHover(null); });
+    svg.appendChild(hit);
+    function r_() { return svg.getBoundingClientRect(); }
+
+    svg.setAttribute("aria-label", "Line chart of " + M_.label.toLowerCase() + " for three strategies and your settings, 2026 to 2032. Use left and right arrow keys to read values; a table view is below.");
+    positionTip(data, x, y);
+  }
+
+  function setHover(idx) {
+    if (idx === state.hover) return;
+    state.hover = idx;
+    renderChart();
+  }
+
+  function positionTip(data, x, y) {
+    var tip = $("tip");
+    if (state.hover == null) { tip.hidden = true; return; }
+    var i = state.hover, M_ = METRICS[state.metric];
+    var rows = data.map(function (d) {
+      var col = d.s.key === "mine" ? "var(--ink)" : "var(--s-" + d.s.cls + ")";
+      return "<div><i style=\"background:" + col + "\"></i>" + d.s.name + ": <b style=\"display:inline\">" + M_.fmt(d.v[i]) + "</b></div>";
+    }).join("");
+    tip.innerHTML = "<b>" + M.YEARS[i] + "</b>" + rows;
+    tip.hidden = false;
+    var wrap = $("chart-wrap"), svg = $("chart");
+    var r = svg.getBoundingClientRect(), k = r.width / W;
+    var left = x(i) * k + 12;
+    var tw = tip.offsetWidth;
+    if (left + tw > r.width) left = x(i) * k - tw - 12;
+    tip.style.left = Math.max(0, left) + "px";
+    tip.style.top = (MT * k + 4) + "px";
+  }
+
+  $("chart").addEventListener("keydown", function (e) {
+    var n = M.YEARS.length;
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+      var cur = state.hover == null ? state.yearIdx : state.hover;
+      var next = Math.max(0, Math.min(n - 1, cur + (e.key === "ArrowRight" ? 1 : -1)));
+      state.hover = null; setHover(next); e.preventDefault();
+    } else if (e.key === "Escape") { setHover(null); }
+  });
+  $("chart").addEventListener("blur", function () { setHover(null); });
+
+  /* ---------- Table view ---------- */
+  function renderTable() {
+    var metric = state.metric, M_ = METRICS[metric], data = seriesValues(metric);
+    var html = "<caption>" + M_.label + ", by year</caption><thead><tr><th scope=\"col\">Year</th>" +
+      data.map(function (d) { return "<th scope=\"col\">" + d.s.name + "</th>"; }).join("") + "</tr></thead><tbody>";
+    M.YEARS.forEach(function (yr, i) {
+      html += "<tr><th scope=\"row\">" + yr + "</th>" + data.map(function (d) { return "<td>" + M_.fmt(d.v[i]) + "</td>"; }).join("") + "</tr>";
+    });
+    $("table").innerHTML = html + "</tbody>";
+  }
+
+  /* ---------- Ending text ---------- */
+  function renderEnding() {
+    var s = state.mine.summary, e = state.mine.ending;
+    var msg = "On your settings, 2032 looks like <b>" + ENDING[e] + "</b>. Youth unemployment is about " + s.youthUnemp2032.toFixed(1) +
+      "%, " + s.emigrants2032.toFixed(1) + "% of Bhutanese live abroad, compute earns about US$" + Math.round(s.revenue2032) +
+      " million a year (" + s.revenueShareOfGdp.toFixed(1) + "% of GDP) and the data centres directly employ about " + Math.round(s.jobs2032) + " people.";
+    ["live-decision", "live-endings"].forEach(function (id) {
+      var n = $(id); n.innerHTML = msg; n.setAttribute("data-ending", e);
+    });
+    Array.prototype.forEach.call(document.querySelectorAll(".ending"), function (c) {
+      var on = c.getAttribute("data-ending") === e;
+      c.classList.toggle("is-current", on);
+      if (on) c.setAttribute("aria-current", "true"); else c.removeAttribute("aria-current");
+    });
+  }
+
+  /* ---------- Scenario comparison table ---------- */
+  function renderCompare() {
+    var cols = [
+      { name: "Baseline (balanced build)", run: presetRuns.balanced },
+      { name: "Upside (people first)", run: presetRuns.people },
+      { name: "Downside (compute first)", run: presetRuns.compute },
+      { name: "Your settings", run: state.mine }
+    ];
+    var rows = [
+      ["Data centre capacity", function (r) { return Math.round(r.mw[6]) + " MW"; }],
+      ["Compute revenue a year", function (r) { return "US$" + Math.round(r.revenue[6]) + "m"; }],
+      ["Direct data centre jobs", function (r) { return Math.round(r.jobs[6]).toLocaleString(); }],
+      ["Youth unemployment", function (r) { return r.youthUnemp[6].toFixed(1) + "%"; }],
+      ["Population living abroad", function (r) { return r.emigrants[6].toFixed(1) + "%"; }],
+      ["GDP", function (r) { return "US$" + r.gdp[6].toFixed(2) + "bn"; }]
+    ];
+    var html = "<table><thead><tr><th scope=\"col\">2032</th>" +
+      cols.map(function (c) { return "<th scope=\"col\">" + c.name + "</th>"; }).join("") + "</tr></thead><tbody>" +
+      rows.map(function (row) {
+        return "<tr><th scope=\"row\">" + row[0] + "</th>" + cols.map(function (c) { return "<td>" + row[1](c.run) + "</td>"; }).join("") + "</tr>";
+      }).join("") + "</tbody></table>";
+    $("compare-table").innerHTML = html;
+  }
+
+  function renderAssumptions() {
+    $("assumptions-table").innerHTML = "<table><thead><tr><th scope=\"col\">Assumption</th><th scope=\"col\">Value</th><th scope=\"col\">Status</th><th scope=\"col\">Basis</th></tr></thead><tbody>" +
+      ASSUMPTIONS.map(function (a) {
+        return "<tr><th scope=\"row\">" + a[0] + "</th><td>" + a[1] + "</td><td>" + a[2] + "</td><td>" + a[3] + "</td></tr>";
+      }).join("") + "</tbody></table>";
+  }
+
+  /* ---------- Scroll to year ---------- */
+  function observeSections() {
+    if (!("IntersectionObserver" in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          var idx = parseInt(en.target.getAttribute("data-year-idx"), 10);
+          if (idx !== state.yearIdx) { state.yearIdx = idx; update(); }
+        }
+      });
+    }, { rootMargin: "-35% 0px -60% 0px" });
+    Array.prototype.forEach.call(document.querySelectorAll("[data-year-idx]"), function (s) { io.observe(s); });
+  }
+
+  /* ---------- Theme and mobile sheet ---------- */
+  $("theme-toggle").addEventListener("click", function () {
+    var root = document.documentElement;
+    var cur = root.getAttribute("data-theme") ||
+      (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    root.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
+  });
+  $("panel-toggle").addEventListener("click", function () {
+    var open = $("panel").classList.toggle("open");
+    this.setAttribute("aria-expanded", open ? "true" : "false");
+    this.textContent = open ? "Hide chart" : "Show chart";
+    renderChart();
+  });
+
+  /* ---------- Main ---------- */
+  function update() {
+    state.mine = M.run(state.params);
+    syncInputs();
+    renderReadouts();
+    renderChart();
+    renderTable();
+    renderEnding();
+    renderCompare();
+  }
+
+  buildStatic();
+  renderAssumptions();
+  update();
+  observeSections();
+})();
+
+</script>
+</body>
+</html>
